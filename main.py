@@ -10,8 +10,10 @@ import os
 load_dotenv()
 
 # using an access token
-g = Github(os.environ.get('Github_Token'))
-repo = g.get_user().get_repo(os.environ.get('Github_Repo_Name'))
+print('test')
+print(os.environ.get('Git_Token'))
+g = Github(os.environ.get('Git_Token'))
+repo = g.get_user().get_repo(os.environ.get('Git_Repo_Name'))
 
 def _get_total_pull_requests():
     count = 0

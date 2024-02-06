@@ -29,7 +29,7 @@ jobs:
 
     - name: .env setting
       run: |
-        echo "Github_Token=${{ secrets.GIT_TOKEN }}" >> .env
-        echo "Github_Repo_Name=${{ secrets.GIT_REPO_NAME }}" >> .env
+        echo "Git_Token=${{ secrets.GIT_TOKEN }}" >> .env
+        echo "Git_Repo_Name=${{ secrets.GIT_REPO_NAME }}" >> .env
         echo "slack_token=${{ secrets.SLACK_TOKEN }}" >> .env
         echo "channel_id=${{ secrets.CHANNEL_ID }}" >> .env
