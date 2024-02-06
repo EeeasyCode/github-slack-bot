@@ -3,7 +3,7 @@ name: PR review bot
 on:
   # 스케쥴러로 실행
   schedule:
-    - cron: "20 15 * * 1-5"
+    - cron: "30 6 * * 1-5"
   workflow_dispatch:
 
 jobs:
