@@ -4,7 +4,7 @@ on:
   # 스케쥴러로 실행
   schedule:
     # utc 기준 9시간을 뺀 값으로 적용해야 함
-    - cron: "35 6 * * 1-5"
+    - cron: "0 0 * * 1-5"
   # 직접 action 실행
   workflow_dispatch:
 
