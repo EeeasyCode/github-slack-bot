@@ -3,7 +3,9 @@ name: PR review bot
 on:
   # 스케쥴러로 실행
   schedule:
-    - cron: "30 6 * * 1-5"
+    # utc 기준 9시간을 뺀 값으로 적용해야 함
+    - cron: "35 6 * * 1-5"
+  # 직접 action 실행
   workflow_dispatch:
 
 jobs:
