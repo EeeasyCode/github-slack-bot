@@ -4,6 +4,7 @@ on:
   # 스케쥴러로 실행
   schedule:
     - cron: "8 15 * * 1-5"
+  workflow_dispatch:
 
 jobs:
   build:
