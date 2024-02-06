@@ -3,7 +3,7 @@ name: PR review bot
 on:
   # 스케쥴러로 실행
   schedule:
-    - cron: "0 15 * * 1-5"
+    - cron: "10 15 * * 1-5"
 
 jobs:
   build:
@@ -25,3 +25,10 @@ jobs:
     - name: run main.py
       run: |
         python main.py
+
+    - name: .env setting
+      run: |
+        echo "Github_Token=${{ secrets.Github_Token }}" >> .env
+        echo "Github_Repo_Name=${{ secrets.Github_Repo_Name }}" >> .env
+        echo "slack_token=${{ secrets.slack_token }}" >> .env
+        echo "channel_id=${{ secrets.channel_id }}" >> .env
