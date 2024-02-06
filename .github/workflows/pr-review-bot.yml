@@ -22,14 +22,17 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    # python 파일 실행
-    - name: run main.py
-      run: |
-        python main.py
 
+    # env 환경 설정
     - name: .env setting
       run: |
         echo "Git_Token=${{ secrets.GIT_TOKEN }}" >> .env
         echo "Git_Repo_Name=${{ secrets.GIT_REPO_NAME }}" >> .env
         echo "slack_token=${{ secrets.SLACK_TOKEN }}" >> .env
         echo "channel_id=${{ secrets.CHANNEL_ID }}" >> .env
+
+    # python 파일 실행
+    - name: run main.py
+      run: |
+        python main.py
+
