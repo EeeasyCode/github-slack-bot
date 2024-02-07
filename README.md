@@ -9,3 +9,9 @@
 - github repository 정보를 가져와 slack 메시지 형태로 가공
 - 가공된 메시지를 지정한 slack 채널로 전송
 
+### pr-review-bot.yml
+
+- github action을 활용하여 main.py를 실행
+- schedule -> cron 표현식을 통해 지정한 시간마다 동작하도록 스케줄링
+- main.py의 의존성을 위해 requirements.txt로 라이브러리 설치
+- 이후, github secret을 사용해 env 값 설정
