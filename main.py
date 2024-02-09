@@ -10,8 +10,6 @@ import os
 load_dotenv()
 
 # using an access token
-print('test')
-print(os.environ.get('Git_Token'))
 g = Github(os.environ.get('Git_Token'))
 repo = g.get_user().get_repo(os.environ.get('Git_Repo_Name'))
 
@@ -29,10 +27,6 @@ def _get_total_pull_requests():
 
 
 count, pulls = _get_total_pull_requests()
-
-# ID of the channel you want to send the message to
-channel_id = os.environ.get('channel_id')
-
 ssl_context = ssl.create_default_context(cafile=certifi.where())
 slack_token = os.environ.get('slack_token')
 client = WebClient(token=slack_token, ssl=ssl_context)
