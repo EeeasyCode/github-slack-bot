@@ -5,6 +5,8 @@
 ## Tech Environment
 
 - Python v3.12
+- actions/checkout@v3
+- actions/setup-python@v3
 
 ## Code Description
 
