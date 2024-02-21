@@ -40,6 +40,13 @@ try:
             channel='#pr-bot',
             text=message
         )
+    else:
+        message = f"<!nest-study> 👋🏻 남아있는 PR이 없습니다!\n"
+        response = client.chat_postMessage(
+            channel='#pr-bot',
+            text=message
+        )
+
 except SlackApiError as e:
     # You will get a SlackApiError if "ok" is False
     assert e.response["error"]
