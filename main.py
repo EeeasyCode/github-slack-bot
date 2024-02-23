@@ -38,13 +38,13 @@ try:
             message += pull.title + ' ' + pull.url + '\n'
         response = client.chat_postMessage(
             channel='#pr-bot',
-            text=message
+            text=message,
         )
     else:
         message = f"<!nest-study> 👋🏻 남아있는 PR이 없습니다!\n"
         response = client.chat_postMessage(
             channel='#pr-bot',
-            text=message
+            text=message,
         )
 
 except SlackApiError as e:
