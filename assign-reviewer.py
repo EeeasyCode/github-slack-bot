@@ -20,6 +20,7 @@ for pull in repo.get_pulls(
             sort="updated",
     ):
     print(pull.user)
+    print('testset')
 
 # def _select_random_reviewer():
 
