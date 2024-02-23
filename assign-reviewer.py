@@ -19,7 +19,7 @@ for pull in repo.get_pulls(
             state="open",
             sort="updated",
     ):
-
+    print(pull.user)
 
 # def _select_random_reviewer():
 
