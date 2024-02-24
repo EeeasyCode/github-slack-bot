@@ -13,6 +13,7 @@ load_dotenv()
 g = Github(os.environ.get('Git_Token'))
 repo = g.get_user().get_repo(os.environ.get('Git_Repo_Name'))
 
+
 def _get_total_pull_requests():
     count = 0
     pull_requests_list = []
