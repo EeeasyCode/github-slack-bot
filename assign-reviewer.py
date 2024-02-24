@@ -28,7 +28,7 @@ def select_random_reviewer(pull_user):
 g = Github(os.environ.get('Git_Token'))
 repo = g.get_user().get_repo('nest-study')
 ssl_context = ssl.create_default_context(cafile=certifi.where())
-slack_token = "xoxb-6343408674325-6687133096581-16lXGmExOY8NxDhoo0oDz1Zs"
+slack_token = os.environ.get('assign_slack_token')
 client = WebClient(token=slack_token, ssl=ssl_context)
 
 print(repo.owner)
