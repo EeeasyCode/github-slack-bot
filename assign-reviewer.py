@@ -6,6 +6,9 @@ from dotenv import load_dotenv
 import os
 import random
 
+# load .env
+load_dotenv()
+
 reviewer_array = [{
     'githubName': 'CEethan',
     'slackUserId': 'U069RPHRU95'
@@ -20,11 +23,6 @@ def select_random_reviewer(pull_user):
 
     return selected_reviewer
 
-
-
-
-# load .env
-load_dotenv()
 
 # using an access token
 g = Github(os.environ.get('Git_Token'))
@@ -55,9 +53,3 @@ for pull in repo.get_pulls(
             channel=slack_id,
             text=message,
         )
-
-
-
-
-# def _select_random_reviewer():
-#     prCreator =
