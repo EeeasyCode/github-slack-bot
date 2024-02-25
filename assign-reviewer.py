@@ -9,6 +9,7 @@ import random
 # load .env
 load_dotenv()
 
+# Reviewer githubName, slackUserId로 관리됨
 reviewer_array = [{
     'githubName': 'CEethan',
     'slackUserId': 'U069RPHRU95'
@@ -18,6 +19,8 @@ reviewer_array = [{
 # 랜덤하게 리뷰어 선택
 def select_random_reviewer(pull_user):
     selected_reviewer = random.choice(reviewer_array)
+
+    # 선택된 리뷰어가 pr을 올린 유저와 같을 경우에 다시 뽑기
     while pull_user == selected_reviewer['githubName']:
         selected_reviewer = random.choice(reviewer_array)
 
@@ -30,10 +33,6 @@ repo = g.get_user().get_repo('nest-study')
 ssl_context = ssl.create_default_context(cafile=certifi.where())
 slack_token = "xoxb-6343408674325-6687133096581-16lXGmExOY8NxDhoo0oDz1Zs"
 client = WebClient(token=slack_token, ssl=ssl_context)
-
-print(repo.owner)
-print(repo.full_name)
-print(repo.get_pulls().totalCount)
 
 for pull in repo.get_pulls(
         state="open",
