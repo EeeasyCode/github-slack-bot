@@ -2,7 +2,9 @@ import os
 from slack_sdk import WebClient
 import ssl
 import certifi
+import dotenv
 
+dotenv.load_dotenv()
 
 def send_slack_message(message):
     ssl_context = ssl.create_default_context(cafile=certifi.where())

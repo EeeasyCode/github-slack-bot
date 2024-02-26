@@ -4,7 +4,9 @@ import certifi
 from slack_sdk import WebClient
 import os
 import random
+import dotenv
 
+dotenv.load_dotenv()
 
 # Reviewer githubName, slackUserId로 관리됨
 reviewer_array = [{
@@ -40,7 +42,6 @@ try:
             github_id, slack_id = reviewer['githubName'], reviewer['slackUserId']
             # 리뷰어 할당
             pull.create_review_request([github_id])
-
             repo_name = repo.full_name
             pr_title = pull.title
             pr_user = pull.user.login
