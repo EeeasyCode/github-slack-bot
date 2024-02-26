@@ -15,7 +15,7 @@ def send_slack_message(message):
 
 try:
     # 이벤트 정보를 사용하여 메시지를 작성
-    pull_request_url = os.getenv('GITHUB_SERVER_URL') + '/' + os.getenv('GITHUB_REPOSITORY') + '/pull/' + os.getenv(
+    pull_request_url = 'https://github.com/EeeasyCode/github-slack-bot/pull/' + os.getenv(
         'PULL_REQUEST_NUMBER')
     sender_username = os.getenv('GITHUB_ACTOR')
     message = f"Pull request에 리뷰가 제출되었습니다. 리뷰어: {sender_username}, Pull Request: {pull_request_url}"
