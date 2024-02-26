@@ -9,23 +9,21 @@ import dotenv
 
 dotenv.load_dotenv()
 
+author_array = {
+    'eeeasycode': 'U069RPHRU95'
+}
 
 g = Github(os.environ.get('Git_Token'))
 repo = g.get_user().get_repo(os.environ.get('Git_Repo_Name'))
-
-# 환경 변수에서 이벤트 페이로드 가져오기
 event_payload_path = os.getenv('GITHUB_EVENT_PATH')
 
 with open(event_payload_path, 'r') as f:
     event_payload = json.load(f)
 
 pr_number = event_payload['pull_request']['number']
-
 pr = repo.get_pull(pr_number)
 pr_author = pr.user.login
-print(pr_number)
-print(pr)
-print(pr_author)
+
 # Slack 메시지 작성
 message = f"안녕하세요, {pr_author}님! 풀 리퀘스트가 리뷰되었습니다."
 
@@ -34,7 +32,7 @@ try:
     ssl_context = ssl.create_default_context(cafile=certifi.where())
     slack_token = os.environ.get('assign_slack_token')
     client = WebClient(token=slack_token, ssl=ssl_context)
-    slack_id = 'U069RPHRU95'
+    slack_id = author_array[pr_author]
     client.chat_postMessage(
         channel=slack_id,
         text=message,
