@@ -45,11 +45,16 @@ try:
             pull.create_review_request([github_id])
 
             # Slack 알림 전송
-            message = f"[{repo.full_name}]\n{pull.title}의 PR 리뷰어로 할당되었습니다! 빠른 리뷰 부탁드립니다.\n{pull.url}\n"
+            message = (f"[{repo.full_name}]\n"
+                       f"PR 리뷰어로 할당되었습니다! 빠른 리뷰 부탁드립니다. 🙏\n"
+                       f"- PR 제목: {pull.title}\n"
+                       f"- 담당자: {pull.user.login}\n"
+                       f"- 리뷰하러 가기 >> <{pull.url}|Click>")
 
             client.chat_postMessage(
                 channel=slack_id,
                 text=message,
             )
+
 except Exception as e:
     print('예외가 발생했습니다.', e)
