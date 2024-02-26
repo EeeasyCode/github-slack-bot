@@ -3,11 +3,8 @@ import ssl
 import certifi
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
-from dotenv import load_dotenv
 import os
 
-# load .env
-load_dotenv()
 
 # using an access token
 g = Github(os.environ.get('Git_Token'))

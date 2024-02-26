@@ -2,12 +2,9 @@ from github import Github
 import ssl
 import certifi
 from slack_sdk import WebClient
-from dotenv import load_dotenv
 import os
 import random
 
-# load .env
-load_dotenv()
 
 # Reviewer githubName, slackUserId로 관리됨
 reviewer_array = [{
