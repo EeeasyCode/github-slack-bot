@@ -29,7 +29,7 @@ jobs:
         run: |
           echo "Git_Token=${{ secrets.GIT_TOKEN }}" >> .env
           echo "Git_Repo_Name=${{ secrets.GIT_REPO_NAME }}" >> .env
-          echo "assign_slack_token=${{ secrets.SLACK_TOKEN }}" >> .env
+          echo "assign_slack_token=${{ secrets.ASSIGN_SLACK_TOKEN }}" >> .env
 
       # python 파일 실행
       - name: run assign-reviewer.py
