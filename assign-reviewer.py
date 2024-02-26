@@ -27,28 +27,30 @@ def select_random_reviewer(pull_user):
     return selected_reviewer
 
 
-# using an access token
-g = Github(os.environ.get('Git_Token'))
-repo = g.get_user().get_repo('nest-study')
-ssl_context = ssl.create_default_context(cafile=certifi.where())
-slack_token = "xoxb-6343408674325-6687133096581-16lXGmExOY8NxDhoo0oDz1Zs"
-client = WebClient(token=slack_token, ssl=ssl_context)
 
-for pull in repo.get_pulls(
-        state="open",
-        sort="updated",
-):
-    if not pull.requested_reviewers:
-        reviewer = select_random_reviewer(pull.user.login)
-        github_id, slack_id = reviewer['githubName'], reviewer['slackUserId']
+try:
+    # using an access token
+    g = Github(os.environ.get('Git_Token'))
+    repo = g.get_user().get_repo(os.environ.get('Git_Repo_Name'))
+    ssl_context = ssl.create_default_context(cafile=certifi.where())
+    slack_token = os.environ.get('assign_slack_token')
+    client = WebClient(token=slack_token, ssl=ssl_context)
+    for pull in repo.get_pulls(
+            state="open",
+            sort="updated",
+    ):
+        if not pull.requested_reviewers:
+            reviewer = select_random_reviewer(pull.user.login)
+            github_id, slack_id = reviewer['githubName'], reviewer['slackUserId']
+            # 리뷰어 할당
+            pull.create_review_request([github_id])
 
-        # 리뷰어 할당
-        pull.create_review_request([github_id])
-
-        # Slack 알림 전송
-        message = f"[{repo.full_name}]\n{pull.title}의 PR 리뷰어로 할당되었습니다! 빠른 리뷰 부탁드립니다.\n{pull.url}\n"
-        print(slack_id)
-        client.chat_postMessage(
-            channel=slack_id,
-            text=message,
-        )
+            # Slack 알림 전송
+            message = f"[{repo.full_name}]\n{pull.title}의 PR 리뷰어로 할당되었습니다! 빠른 리뷰 부탁드립니다.\n{pull.url}\n"
+            print(slack_id)
+            client.chat_postMessage(
+                channel=slack_id,
+                text=message,
+            )
+except Exception as e:
+    print('예외가 발생했습니다.', e)
