@@ -44,16 +44,36 @@ try:
             # 리뷰어 할당
             pull.create_review_request([github_id])
 
-            # Slack 알림 전송
-            message = (f"[{repo.full_name}]\n"
-                       f"PR 리뷰어로 할당되었습니다! 빠른 리뷰 부탁드립니다. 🙏\n"
-                       f"- PR 제목: {pull.title}\n"
-                       f"- 담당자: {pull.user.login}\n"
-                       f"- 리뷰하러 가기 >> <{pull.url}|Click>")
+            repo_name = repo.full_name
+            pr_title = pull.title
+            pr_user = pull.user.login
+            pr_url = pull.url
 
+            # Slack 알림 전송
+            blocks = [{
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": " *[" + os.environ.get('Git_Repo_Name') + "]* \n PR 리뷰어로 할당되었습니다! 빠른 리뷰 부탁드립니다. 🙏"
+                }
+            }]
+            attachments = [
+                {
+                    "blocks": [
+                        {
+                            "type": "section",
+                            "text": {
+                                "type": "mrkdwn",
+                                "text": "• PR 제목: " + pr_title + "\n • 담당자: " + pr_user + "\n • 리뷰하러 가기 >> <" + pr_url + "|Click>"
+                            }
+                        },
+                    ]
+                }
+            ]
             client.chat_postMessage(
                 channel=slack_id,
-                text=message,
+                blocks=blocks,
+                attachments=attachments
             )
 
 except Exception as e:
