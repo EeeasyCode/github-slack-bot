@@ -4,7 +4,7 @@
 # PR review bot 
 
 > 지정한 레포지토리의 PR이 남아있는지 확인 후, 평일 지정한 시간에 Slack을 통해 알림을 전송하는 Bot 입니다.
-> 
+
 ## Tech Environment
 
 - Python v3.12
@@ -24,3 +24,6 @@
 - schedule -> cron 표현식을 통해 지정한 시간마다 동작하도록 스케줄링
 - main.py의 의존성을 위해 requirements.txt로 라이브러리 설치
 - 이후, github secret을 사용해 env 값 설정
+
+# assign reviewer bot
+> PR을 올리면 랜덤으로 리뷰어가 할당되어 Slack을 통해 알림받을 수 있습니다. 
