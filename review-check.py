@@ -14,8 +14,8 @@ g = Github(os.environ.get('Git_Token'))
 repo = g.get_user().get_repo(os.environ.get('Git_Repo_Name'))
 
 # 환경 변수에서 이벤트 페이로드 가져오기
-event_payload = json.loads(os.getenv('GITHUB_EVENT_PATH'))
-
+event_payload = os.getenv('GITHUB_EVENT_PATH')
+print(event_payload)
 # 풀 리퀘스트 리뷰 이벤트인 경우
 pr_number = event_payload['pull_request']['number']
 pr = repo.get_pull(pr_number)
