@@ -10,7 +10,7 @@ import dotenv
 dotenv.load_dotenv()
 
 author_array = {
-    'eeeasycode': 'U069RPHRU95'
+    'EeeasyCode': 'U069RPHRU95'
 }
 
 g = Github(os.environ.get('Git_Token'))
