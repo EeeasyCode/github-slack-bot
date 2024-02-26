@@ -20,7 +20,9 @@ event_payload = json.loads(os.getenv('GITHUB_EVENT_PATH'))
 pr_number = event_payload['pull_request']['number']
 pr = repo.get_pull(pr_number)
 pr_author = pr.user.login
-
+print(pr_number)
+print(pr)
+print(pr_author)
 # Slack 메시지 작성
 message = f"안녕하세요, {pr_author}님! 풀 리퀘스트가 리뷰되었습니다."
 

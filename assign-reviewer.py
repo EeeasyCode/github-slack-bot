@@ -45,7 +45,7 @@ try:
             repo_name = repo.full_name
             pr_title = pull.title
             pr_user = pull.user.login
-            pr_url = pull.url
+            pr_url = pull.html_url
 
             # Slack 알림 전송
             blocks = [{

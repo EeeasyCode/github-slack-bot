@@ -30,11 +30,12 @@ count, pulls = _get_total_pull_requests()
 ssl_context = ssl.create_default_context(cafile=certifi.where())
 slack_token = os.environ.get('slack_token')
 client = WebClient(token=slack_token, ssl=ssl_context)
-
+pr_url = pull.html_url
 try:
     if count > 0:
         message = f"<!nest-study> 👋🏻 총 {count}개의 Pull Request가 리뷰를 기다리고 있습니다!\n"
         for pull in pulls:
+            pr_url = pull.html_url
             message += pull.title + ' ' + pull.url + '\n'
         response = client.chat_postMessage(
             channel='#pr-bot',
