@@ -46,7 +46,7 @@ for pull in repo.get_pulls(
         pull.create_review_request([github_id])
 
         # Slack 알림 전송
-        message = f"[{repo.full_name}]\n{pull.title}의 PR 리뷰어로 할당되었습니다! 빠른 리뷰 부탁드립니다.\n{pull.url}\n'"
+        message = f"[{repo.full_name}]\n{pull.title}의 PR 리뷰어로 할당되었습니다! 빠른 리뷰 부탁드립니다.\n{pull.url}\n"
         print(slack_id)
         client.chat_postMessage(
             channel=slack_id,
