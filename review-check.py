@@ -4,8 +4,8 @@ from slack_sdk.errors import SlackApiError
 import ssl
 import certifi
 import os
-import json
 import dotenv
+import json
 
 dotenv.load_dotenv()
 
@@ -23,9 +23,32 @@ with open(event_payload_path, 'r') as f:
 pr_number = event_payload['pull_request']['number']
 pr = repo.get_pull(pr_number)
 pr_author = pr.user.login
+pr_title = pr.title
+pr_reviewer = pr.get_reviews().get_page(0)[0].user.login
+pr_url = pr.html_url
 
 # Slack 메시지 작성
-message = f"안녕하세요, {pr_author}님! 풀 리퀘스트가 리뷰되었습니다."
+blocks = [{
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": " *[" + os.environ.get('Git_Repo_Name') + "]* \n " + pr_author + "님께서 요청하신 PR에 리뷰가 등록되었습니다."
+                }
+            }]
+attachments = [
+    {
+        "blocks": [
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "• PR 제목: " + pr_title + "\n • 리뷰어: " + pr_reviewer + "\n • 리뷰 확인하기 >> <" + pr_url + "|Click>"
+                }
+            },
+        ]
+    }
+]
+
 
 # Slack으로 메시지 보내기
 try:
@@ -35,8 +58,8 @@ try:
     slack_id = author_array[pr_author]
     client.chat_postMessage(
         channel=slack_id,
-        text=message,
+        blocks=blocks,
+        attachments=attachments
     )
-    print("Slack 메시지가 성공적으로 전송되었습니다.")
 except SlackApiError as e:
-    print(f"Slack 메시지 전송 중 오류 발생: {e.response['error']}")
+    assert e.response["error"]

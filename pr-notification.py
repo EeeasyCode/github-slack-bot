@@ -49,5 +49,4 @@ try:
         )
 
 except SlackApiError as e:
-    # You will get a SlackApiError if "ok" is False
     assert e.response["error"]
