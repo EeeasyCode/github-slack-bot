@@ -38,6 +38,7 @@ try:
             state="open",
             sort="updated",
     ):
+        print("hi")
         if not pull.requested_reviewers:
             reviewer = select_random_reviewer(pull.user.login)
             github_id, slack_id = reviewer['githubName'], reviewer['slackUserId']
