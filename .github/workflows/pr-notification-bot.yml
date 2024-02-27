@@ -1,4 +1,4 @@
-name: PR review bot
+name: "PR notification bot"
 
 on:
   # 스케쥴러로 실행

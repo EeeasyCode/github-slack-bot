@@ -5,23 +5,24 @@ from slack_sdk import WebClient
 import os
 import random
 import dotenv
+import json
 
 dotenv.load_dotenv()
 
 # Reviewer githubName, slackUserId로 관리됨
-reviewer_array = [{
-    'githubName': 'CEethan',
-    'slackUserId': 'U069RPHRU95'
-}]
+
+member_list_path = "member_list.json"
+with open(member_list_path, 'r') as file:
+    member_list = json.load(file)
 
 
 # 랜덤하게 리뷰어 선택
 def select_random_reviewer(pull_user):
-    selected_reviewer = random.choice(reviewer_array)
+    selected_reviewer = random.choice(member_list)
 
     # 선택된 리뷰어가 pr을 올린 유저와 같을 경우에 다시 뽑기
     while pull_user == selected_reviewer['githubName']:
-        selected_reviewer = random.choice(reviewer_array)
+        selected_reviewer = random.choice(member_list)
 
     return selected_reviewer
 
